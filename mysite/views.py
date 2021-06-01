@@ -18,5 +18,17 @@ def contact(request):
 
 def showdata(request):
     message=request.GET.get('message','default')
-    print(message)
-    return HttpResponse(message)
+    removepunc=request.GET.get('removepunc','off')
+    # return HttpResponse(message)
+    if removepunc == "on":
+        punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+        analyzed = ""
+        for char in message:
+            if char not in punctuations:
+                analyzed = analyzed + char
+        params = {'purpose': 'Removed Punctuations', 'analyzed_text': analyzed}
+        return render(request, 'analyze.html', params)
+
+    else:
+        return HttpResponse('Error')
+
