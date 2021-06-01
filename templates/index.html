@@ -5,8 +5,11 @@
 	<title>Home Page</title>
 </head>
 <body>
-    <h2>Home Template Page</h2>
-    Name : {{name}}<br> 
-    Location : {{place}}<br> 
+    <h1>{{name}} is from {{place}}</h1>
+    <h2>Please Enter Message</h2>
+    <form action="/showdata" method="GET">
+        <textarea name="message"></textarea>
+        <button type="submit">submit</button>
+    </form>
 </body>
 </html>

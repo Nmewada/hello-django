@@ -15,3 +15,8 @@ def services(request):
 
 def contact(request):
     return HttpResponse("This is Contact us Page..<a href='/'>Back</a>")
+
+def showdata(request):
+    message=request.GET.get('message','default')
+    print(message)
+    return HttpResponse(message)
