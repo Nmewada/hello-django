@@ -19,16 +19,49 @@ def contact(request):
 def showdata(request):
     message=request.GET.get('message','default')
     removepunc=request.GET.get('removepunc','off')
+    fullcaps=request.GET.get('fullcaps','off')
+    newlineremover=request.GET.get('newlineremover','off')
+    extraspaceremover=request.GET.get('extraspaceremover','off')
     # return HttpResponse(message)
+    purpose = ""
+    strr = message
     if removepunc == "on":
+        tempStr = ""
+        purpose +=' | Removed Punctuations'
         punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
-        analyzed = ""
-        for char in message:
+        for char in strr:
             if char not in punctuations:
-                analyzed = analyzed + char
-        params = {'purpose': 'Removed Punctuations', 'analyzed_text': analyzed}
-        return render(request, 'analyze.html', params)
+                tempStr = tempStr + char
+        params = {'purpose': 'Removed Punctuations', 'message_text': tempStr}
+        strr = tempStr
+    
+    if fullcaps=="on":
+        purpose +=' | Change To Uppercase'
+        strr = strr.upper()
+        params = {'purpose': 'Change To Uppercase', 'message_text': strr}
 
+    if newlineremover=="on":
+        tempStr = ""
+        purpose +=' | Removed NewLines'
+        for char in strr:
+            if char!="\n":
+                tempStr += char
+        params = {'purpose': 'Removed NewLines', 'message_text': tempStr}
+        strr = tempStr
+
+    if extraspaceremover=="on":
+        tempStr = ""
+        purpose +=' | Removed Extra Space'
+        for index, char in enumerate(strr):
+            if not(strr[index] == " " and strr[index+1]==" "):
+                tempStr += char
+        params = {'purpose': 'Removed NewLines', 'message_text': tempStr}
+        strr = tempStr
+
+
+
+    params = {'purpose':purpose , 'message_text':strr}
+    if(removepunc == "on" or fullcaps=="on" or newlineremover=="on" or extraspaceremover=="on"):
+        return render(request, 'analyze.html', params)
     else:
         return HttpResponse('Error')
-
