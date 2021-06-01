@@ -1,13 +1,13 @@
 #I have created this file-Nitin
 from django.http import HttpResponse
 def index(request):
-    return HttpResponse("<center>This is Home Page..Please <a href='https://www.google.com/'>click here</a></center>")
+    return HttpResponse("<center>This is Home Page..<br><a href='about'>About</a> <a href='services'>Services</a>  <a href='contact'>Contact</a></center>")
 
 def about(request):
-    return HttpResponse("This is About us Page")
+    return HttpResponse("This is About us Page..<a href='/'>Back</a>")
 
 def services(request):
-    return HttpResponse("This is Services Page")
+    return HttpResponse("This is Services Page..<a href='/'>Back</a>")
 
 def contact(request):
-    return HttpResponse("This is Contact us Page")
+    return HttpResponse("This is Contact us Page..<a href='/'>Back</a>")
