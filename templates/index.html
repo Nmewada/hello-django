@@ -45,7 +45,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <div class="container">
-        <form action="/showdata" method="GET">
+        <form action="/showdata" method="POST">
+            {% csrf_token %}
             <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Enter Your Message</label>
             <textarea class="form-control" name="message" id="exampleFormControlTextarea1" rows="5"></textarea>

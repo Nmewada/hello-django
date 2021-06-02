@@ -17,11 +17,11 @@ def contact(request):
     return HttpResponse("This is Contact us Page..<a href='/'>Back</a>")
 
 def showdata(request):
-    message=request.GET.get('message','default')
-    removepunc=request.GET.get('removepunc','off')
-    fullcaps=request.GET.get('fullcaps','off')
-    newlineremover=request.GET.get('newlineremover','off')
-    extraspaceremover=request.GET.get('extraspaceremover','off')
+    message=request.POST.get('message','default')
+    removepunc=request.POST.get('removepunc','off')
+    fullcaps=request.POST.get('fullcaps','off')
+    newlineremover=request.POST.get('newlineremover','off')
+    extraspaceremover=request.POST.get('extraspaceremover','off')
     # return HttpResponse(message)
     purpose = ""
     strr = message
@@ -44,7 +44,7 @@ def showdata(request):
         tempStr = ""
         purpose +=' | Removed NewLines'
         for char in strr:
-            if char!="\n":
+            if char != "\n" and char!="\r":
                 tempStr += char
         params = {'purpose': 'Removed NewLines', 'message_text': tempStr}
         strr = tempStr
